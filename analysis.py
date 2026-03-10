@@ -5,7 +5,7 @@ from scipy.spatial import cKDTree
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-matplotlib.use('MacOSX')  # Use the native macOS backend for better performance on Mac
+matplotlib.use('MacOSX')  #or 'TkAgg' or 'Qt5Agg' depending on your system
 from matplotlib.backend_bases import MouseEvent
 
 from simulation import Simulation
