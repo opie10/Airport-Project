@@ -4,6 +4,7 @@ from typing import List
 from scipy.spatial import cKDTree
 import numpy as np
 import matplotlib
+import json
 import matplotlib.pyplot as plt
 matplotlib.use('MacOSX')  #or 'TkAgg' or 'Qt5Agg' depending on your system
 from matplotlib.backend_bases import MouseEvent
@@ -26,6 +27,7 @@ def _build_tooltips(costs: List[float], sats: List[float], seeds: List[int]) -> 
 def plot_simulation_results(num_runs: int, show_plot: bool = True, save_path: str | None = None) -> None:
     sim = Simulation(num_runs=num_runs)
     sim.run()
+
 
     costs = [result['graph_total_cost'] for result in sim.results]
     weighted_sats = [result['graph_weighted_satisfaction'] for result in sim.results]
@@ -54,6 +56,13 @@ def plot_simulation_results(num_runs: int, show_plot: bool = True, save_path: st
             bbox=dict(boxstyle='round,pad=0.3', fc='white', ec='black', alpha=0.9),
         )
     annotation.set_visible(False)
+
+    with open('simulation_results.json', 'w') as f:
+        json.dump({
+            'execution_time': sim.execution_time,
+            'num_runs': sim.num_runs,
+            'results': [{k: v for k, v in r.items() if k != 'paths'} for r in sim.results]
+        }, f)
 
     last_idx = None
 
@@ -100,6 +109,6 @@ if __name__ == '__main__':
     parser.add_argument('--no-show', action='store_true', help='Do not open interactive window.')
     args = parser.parse_args()
 
-    plot_simulation_results(num_runs=100000, show_plot=True, save_path="my_plot.png")
+    plot_simulation_results(num_runs=10000, show_plot=True, save_path="my_plot.png")
 
    # plot_simulation_results(num_runs=args.runs, show_plot=not args.no_show, save_path=args.save)
