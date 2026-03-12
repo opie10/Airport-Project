@@ -48,7 +48,7 @@ class Main:
 
     def __init__(self):
         seed = random.randint(0, 2 ** 32 - 1)  # generate a random seed number
-        random.seed(seed)
+        random.seed(2383482255)
         self.randomSeed = seed
         self.seed = seed
         self.TotalEdgeDistance = 0
@@ -56,6 +56,7 @@ class Main:
         self.pathDataArray = []
         self.G = nx.Graph()
         self.G.add_nodes_from(self.nodeArray)
+
 
         # Pick a random number of edges between 5 and 15
         num_edges = random.randint(5, 15)
@@ -162,6 +163,11 @@ class Main:
         weights = [pd.getData("population") / pathData.pathData.NetworkPopulation for pd in self.pathDataArray]
         weighted_avg_sat = sum(pd.getData("pathsatisfaction") * w for pd, w in zip(self.pathDataArray, weights)) / sum(weights)
         return weighted_avg_sat
+    def get_graph_fingerprint(self):
+        """Return a hashable representation of the graph structure"""
+        edges = tuple(sorted([tuple(sorted([u, v])) for u, v in self.G.edges()]))
+        return edges
+
 if __name__ == "__main__":
     main_instance = Main()
     main_instance.displayData()
