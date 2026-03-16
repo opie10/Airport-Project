@@ -48,7 +48,7 @@ class Main:
 
     def __init__(self):
         seed = random.randint(0, 2 ** 32 - 1)  # generate a random seed number
-        random.seed(2383482255)
+        random.seed(seed)#2383482255
         self.randomSeed = seed
         self.seed = seed
         self.TotalEdgeDistance = 0

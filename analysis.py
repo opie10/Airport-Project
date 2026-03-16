@@ -5,7 +5,7 @@ from scipy.spatial import cKDTree
 import numpy as np
 import matplotlib
 import json
-matplotlib.use('MacOSX')  # or 'TkAgg' or 'Qt5Agg' depending on your system
+matplotlib.use('TkAgg')  # or 'TkAgg' or 'Qt5Agg' depending on your system
 import matplotlib.pyplot as plt
 from matplotlib.backend_bases import MouseEvent
 

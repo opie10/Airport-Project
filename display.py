@@ -4,7 +4,7 @@ from typing import List
 
 import numpy as np
 import matplotlib
-matplotlib.use('MacOSX')
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 from matplotlib.backend_bases import MouseEvent
 from scipy.spatial import cKDTree
